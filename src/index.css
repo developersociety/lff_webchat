@@ -26,3 +26,19 @@ body:after {
   opacity: 0.2;
   background: url("/img/logo.svg");
 }
+
+.Twilio-MainHeader,
+.Twilio-ChatItem-Avatar,
+.Twilio-MessageBubble,
+.Twilio-MessageInput-SendButton,
+.Twilio-MessageCanvasTray {
+  background: #902d8d !important;
+}
+
+.Twilio-MessageBubble.css-1std3cb {
+  background: #cc7a00 !important;
+}
+
+.Twilio-ChatItem-Avatar.css-1bqj7vz {
+  background: none !important;
+}
