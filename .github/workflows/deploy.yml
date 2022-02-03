@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Deploy
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Get Node.js version
+        id: nvmrc
+        run: echo "::set-output name=version::$(cat .nvmrc)"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ steps.nvmrc.outputs.version }}
+
+      - name: Node.js npm cache
+        id: npm-cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ steps.nvmrc.outputs.version }}-${{ hashFiles('package.json', 'package-lock.json') }}
+
+      - name: Install Node.js packages
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: |
+          npm ci
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          cname: sdafmh-chat.devsoc.org
