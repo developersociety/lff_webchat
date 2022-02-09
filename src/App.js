@@ -1,13 +1,9 @@
 import React from 'react';
 import * as FlexWebChat from "@twilio/flex-webchat-ui";
-import ip_lookup from './ip_lookup';
 
 class App extends React.Component {
 
-  state = {
-    'ip' : '',
-    'country' : ''
-  };
+  state = {};
 
   async init(props) {
     const { configuration } = props;
@@ -40,17 +36,6 @@ class App extends React.Component {
       yourFriendlyNameOverride: false,
       theirFriendlyNameOverride: false
     }
-
-    // get ip data ansd assign to state
-    let ip_data = await ip_lookup()
-
-    this.state.ip = ip_data.ip
-    this.state.country = ip_data.country;
-
-    FlexWebChat.ContextProvider.context = this.state;
-
-    console.log(FlexWebChat.ContextProvider.context)
-
   }
 
   constructor(props) {
