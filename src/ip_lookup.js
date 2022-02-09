@@ -7,8 +7,6 @@ const ip_lookup = async () => {
 
   let ip_data = await response.json();
 
-  console.log(ip_data)
-
   return { 'ip': ip_data.ip, 'country': ip_data.country_name };
 }
 
