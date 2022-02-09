@@ -1,13 +1,15 @@
 import React from 'react';
 import * as FlexWebChat from "@twilio/flex-webchat-ui";
+import ip_lookup from './ip_lookup';
 
 class App extends React.Component {
 
-  state = {};
+  state = {
+    'ip' : '',
+    'country' : ''
+  };
 
-  constructor(props) {
-    super(props);
-
+  async init(props) {
     const { configuration } = props;
     FlexWebChat.Manager.create(configuration)
       .then(manager => this.setState({ manager }))
@@ -39,6 +41,22 @@ class App extends React.Component {
       theirFriendlyNameOverride: false
     }
 
+    // get ip data ansd assign to state
+    let ip_data = await ip_lookup()
+
+    this.state.ip = ip_data.ip
+    this.state.country = ip_data.country;
+
+    FlexWebChat.ContextProvider.context = this.state;
+
+    console.log(FlexWebChat.ContextProvider.context)
+
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.init(props);
 
     // Open the chat window by default
     FlexWebChat.Actions.invokeAction("ToggleChatVisibility");
