@@ -18,6 +18,9 @@ class App extends React.Component {
     // hide welcome message blocks
     FlexWebChat.MessagingCanvas.defaultProps.showWelcomeMessage = false;
 
+    // Turn off Messaging Canvas Tray
+    FlexWebChat.MessagingCanvas.defaultProps.showTrayOnInactive = false;
+
     // inital message
     FlexWebChat.MessagingCanvas.defaultProps.predefinedMessage = {
       body: `Croeso i Llinell Gymorth Byw Heb Ofn
