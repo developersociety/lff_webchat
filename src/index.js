@@ -19,7 +19,7 @@ async function init_react_with_ip_data() {
 
     ReactDOM.render(
         <App configuration={app_config} />,
-        document.getElementById("root")
+        document.getElementById("webchat-root")
     );
 
     registerServiceWorker();

@@ -46,9 +46,6 @@ class App extends React.Component {
 
     this.init(props);
 
-    // Open the chat window by default
-    FlexWebChat.Actions.invokeAction("ToggleChatVisibility");
-
     // Restart the chat when the page is refreshed
     FlexWebChat.Actions.invokeAction("RestartEngagement");
   }
