@@ -9,20 +9,20 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Get Node.js version
         id: nvmrc
         run: echo "::set-output name=version::$(cat .nvmrc)"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvmrc.outputs.version }}
 
       - name: Node.js npm cache
         id: npm-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.npm
